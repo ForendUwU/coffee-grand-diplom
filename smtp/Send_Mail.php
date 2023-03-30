@@ -16,7 +16,7 @@ require 'PHPMailer.php';
     // Настройки вашей почты
     $mail->Host       = 'smtp.mail.ru'; // SMTP сервера вашей почты
     $mail->Username   = 'coffeegrandhelper@mail.ru'; // Логин на почте
-    $mail->Password   = 'yNTBkiyeGEeM2rN1bjMT'; // Пароль на почте
+    $mail->Password   = 'UMtMy0efXcVTcNm2L7MX'; // Пароль на почте
     $mail->Port       = 465;
     $mail->SMTPSecure = "ssl";
     $mail->setFrom('coffeegrandhelper@mail.ru', 'Помощник Coffee Grand'); // Адрес самой почты и имя отправителя

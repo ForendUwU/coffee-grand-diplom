@@ -238,7 +238,7 @@
                         url: 'oform.php',
                         data: {bonus:isBonus},
                         success: function(data) {
-                            var url = "http://localhost/kursach/MenuPage.php?success=1";
+                            var url = "http://localhost/diplom/MenuPage.php?success=1";
                             $(location).attr('href',url);
 
                             },
@@ -255,7 +255,7 @@
                         url: 'oform.php',
                         data: {bonus:isBonus},
                         success: function(data) {
-                            var url = "http://localhost/kursach/MenuPage.php?success=1";
+                            var url = "http://localhost/diplom/MenuPage.php?success=1";
                             $(location).attr('href',url);
 
                             },

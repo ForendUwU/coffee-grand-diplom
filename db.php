@@ -3,5 +3,5 @@
  //$base_url='http://coffeegrand.liveblog365.com/';
 
 $connection = @mysqli_connect("localhost", "root", "", "grandcafe");
- $base_url='http://localhost/kursach/';
+ $base_url='http://localhost/diplom/';
 ?>
