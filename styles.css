@@ -255,6 +255,11 @@ hr
 	background-color: #292929;
 	
 	margin-bottom: 10px;
+
+	margin-right: 1%; 
+	margin-left: 1%; 
+
+	border-radius: 10px;
 }
 
 .tov img
@@ -291,7 +296,7 @@ hr
 
 .w
 {
-	padding-top: 0px;
+	padding-top: 20px;
 }
 
 .w h4
@@ -587,7 +592,7 @@ footer
 	background-color: #ff7878;
 	
 	height: 50px;
-	width: 400px;
+	width: 70%;
 
 	font-family: "Raleway";
 	font-weight: 400;
@@ -639,6 +644,10 @@ select.minimal:focus {
 .tovSel
 {
 	padding: 0;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 #sum
@@ -652,4 +661,10 @@ select.minimal:focus {
 }
 
 
+.tovrow
+{
+	display: flex !important;
+	flex-wrap: wrap;
+	justify-content:center; 
+}
 
