@@ -131,7 +131,7 @@
 
 
         <div class="container w">
-            <div class="row row-cols-2  row-cols-lg-4 g-3 centered tovrow">
+            <div class="row row-cols-2 ins row-cols-lg-4 g-3 centered tovrow">
                 <br><br>
                 <?php 
                     
@@ -143,7 +143,7 @@
                     $result = mysqli_query($connection, $sql);
                     while ($row = mysqli_fetch_array($result))
                     {   
-                        echo "<div class='col mt-3 tov' style='min-width:250px'>
+                        echo "<div class='col mt-4 tov' style='min-width:250px'>
                         
                         <img src=img/".$row['photo']." alt=''>
                         <h4>".$row['naim']."</h4>
@@ -195,7 +195,7 @@
         </div>
 
 
-<script src="https://unpkg.com/cookielib/src/cookie.js"></script>
+<script src="js.cookie.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
         <?php if (isset($_GET['success'])) {?>
@@ -213,7 +213,7 @@
         } ?>
 
         <script>
-            if(getCookie('user') == 0 && getCookie('admin') == 0)
+            if(Cookies.get('user') == 0 && Cookies.get('admin') == 0)
             {
                 $('.fb').attr('disabled', true);
             }
@@ -255,7 +255,7 @@
                          $('.ins').html("<br><br>");
                         for (let key in result.cena) {
                             
-                            $('.ins').append("<div class='col-12 col-sm-6 col-md-4 col-lg-3 tov'> <img src=img/"+result.photo[key]+" alt=''> <h4>"+result.naim[key]+"</h4><h3>"+result.opis[key]+"</h3><h4>"+result.cena[key]+" руб</h4><button onclick='ins1()' class='fb' type='submit' name='addBtn' value="+result.id[key]+">Добавить</button></div>");
+                            $('.ins').append("<div class='col mt-4 tov' style='min-width:250px'> <img src=img/"+result.photo[key]+" alt=''> <h4>"+result.naim[key]+"</h4><h3>"+result.opis[key]+"</h3><h4>"+result.cena[key]+" руб.</h4><button onclick='ins1()' class='fb' type='submit' name='addBtn' value="+result.id[key]+">Добавить</button></div>");
                         }
                         
 
