@@ -339,7 +339,7 @@ hr
 
 .wb
 {
-	padding-top: 35px;
+	
 	padding-bottom: 35px;
 	margin-bottom: 0;
 }
@@ -530,6 +530,13 @@ hr
 	font-size: 30px;
 	text-align: center;
 	height: 33px;
+	width: 50%;
+}
+
+.kolvoh
+{
+	display: flex;
+	justify-content: center;
 }
 
 footer
@@ -668,3 +675,13 @@ select.minimal:focus {
 	justify-content:center; 
 }
 
+button.fb
+{
+	margin-top: 20px;
+}
+
+.kolvoInp
+{
+	padding-left: 5% !important;
+
+}

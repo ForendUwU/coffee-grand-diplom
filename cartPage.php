@@ -68,97 +68,71 @@
         </div>
 
         <?php if ($_SESSION['kolvo'] != 0) {?>
-        <div class="container wb">
+        <div class="container w">
             <div class="row centered">
-                <br><br>
+                
                 <div class="col-lg-8 col-lg-offset-2">
                     <h4>Содержание заказа</h4>
                 </div>
-                <div class="col-12 col-sm-3 col-md-3 col-lg-3">
-                    <h3>Название</h3>   
-                    <hr>
-                    <?php 
-                        
-                        include 'db.php';
-                        $sql = 'SELECT tovar.naim FROM tovar inner join cart on cart.idTov = tovar.ID where idZak='.$_SESSION["order"];
-                        $result = mysqli_query($connection, $sql);
-                        while ($row = mysqli_fetch_array($result))
-                        {   
-                            echo "<h3>".$row['naim']."</h3>";
-                        }
-                        mysqli_close($connection);
-                    ?>
-                    <hr>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <h3>Описание</h3>
-                    <hr>
-                    <?php 
-                        include 'db.php';
-                        $sql = 'SELECT tovar.opis FROM tovar inner join cart on cart.idTov = tovar.ID where idZak='.$_SESSION["order"];
-                        $result = mysqli_query($connection, $sql);
-                        while ($row = mysqli_fetch_array($result))
-                        {   
-                            echo "<h3>".$row['opis']."</h3>";
-                        }
-                        mysqli_close($connection);
-                    ?>
-                    <hr>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                    <h3>Цена</h3>
-                    <hr>
-                    <?php 
-                        include 'db.php';
-                        $sql = 'SELECT tovar.cena FROM tovar inner join cart on cart.idTov = tovar.ID where idZak='.$_SESSION["order"];
-                        $result = mysqli_query($connection, $sql);
-                        while ($row = mysqli_fetch_array($result))
-                        {   
-                            echo "<h3>".$row['cena']." руб.</h3>";
-                        }   
-                        mysqli_close($connection);
-                    ?>
-                    <hr>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 col-lg-2 kolvo">
-                    <h3>Кол-во</h3>
-                    <hr>
-                    <?php 
-                        include 'db.php';
-                        $sql = 'SELECT cart.kolvoTov, cart.idTov FROM tovar inner join cart on cart.idTov = tovar.ID where idZak='.$_SESSION["order"];
-                        $result = mysqli_query($connection, $sql);
+            </div>
+            <br>
 
-                        while ($row = mysqli_fetch_array($result))
-                        {   
-                            echo "<h3 class='kolvoh'>
-                            <input type='number' id=".$row['idTov']." class='kolvoh form-control kolvoInp' value='".$row['kolvoTov']."'>
-                            </input>
-                            </h3>";
-                        }
-                        mysqli_close($connection);
-                    ?>
-                    <hr>
-                </div>
-
-                <div class="col-12 col-sm-6 col-md-4 col-lg-2">
-                    <h3>Удалить</h3>
-                    <hr>
-                    <?php 
-                        include 'db.php';
-                        $sql = 'SELECT cart.kolvoTov, cart.idTov FROM tovar inner join cart on cart.idTov = tovar.ID where idZak='.$_SESSION["order"];
-                        $result = mysqli_query($connection, $sql);
-                        while ($row = mysqli_fetch_array($result))
-                        {   
-                            echo "<h3><form method='POST' action='udal.php'><button class='trashBtn' value=".$row['idTov']." name='idTov' type='submit'><i class='fa-solid fa-trash'></i></button></form></h3>";
-                        }
-                        mysqli_close($connection);
-                    ?>
+            <div class="row row-cols-2 ins row-cols-lg-4 g-3 centered tovrow">
+                
+                <?php 
                     
-                    <hr>
-                </div>
+
+                    include 'db.php';
+
+
+                    $sql = 'SELECT tovar.naim, tovar.photo, tovar.opis, tovar.cena, tovar.ID, cart.idTov, cart.kolvoTov FROM tovar inner join cart on cart.idTov = tovar.ID where idZak='.$_SESSION["order"]; 
+                    $result = mysqli_query($connection, $sql);
+                    while ($row = mysqli_fetch_array($result))
+                    {   
+                        echo "<div class='col mt-4 tov' style='min-width:250px; max-width:250px;'>
+                        
+                        <img src=img/".$row['photo']." alt=''>
+                        <h4>".$row['naim']."</h4>
+                        <h3>".$row['opis']."</h3>
+                        <h4>".$row['cena']." руб.</h4>
+                        <h3 class='kolvoh'><input type='number' id=".$row['idTov']." class='form-control kolvoInp' value='".$row['kolvoTov']."'></input></h3>
+                        <button class='fb' type='submit' name='addBtn' value=".$row['idTov'].">Удалить</button>
+                        
+                        </div>
+                        ";
+                    }
+                    if (isset($_POST["addBtn"])) {
+                        if (!isset($_SESSION["order"])) {
+                            $sql = 'SELECT max(ID) as maxId FROM zakazy';
+                            $result = mysqli_query($connection, $sql);
+                            $row = mysqli_fetch_array($result);
+                            $_SESSION["order"] = $row['maxId'];
+                        }
+                            
+
+                            $sql1 = 'SELECT kolvoTov FROM cart where idZak = '.$_SESSION["order"].' and idTov ='.$_POST["addBtn"];
+                            $result1 = mysqli_query($connection, $sql1);
+                            $row1 = mysqli_fetch_array($result1);
+                            if ($row1) {
+                                $query=mysqli_query($connection,'UPDATE cart SET kolvoTov=kolvoTov + 1 where idZak = '.$_SESSION["order"].' and idTov ='.$_POST["addBtn"]);
+                            }
+                            else
+                            {
+                                $query=mysqli_query($connection,"insert into cart values(default, ".$_SESSION["order"].",".$_POST["addBtn"].",'1')");
+                            }
+                            
+
+                            
+                    }
+                ?>
+                
+            </div>
+
+                
+                
 
                
-            </div>
+            
 
             <?php 
                         include 'db.php';
@@ -190,6 +164,7 @@
             
             </div>   
         </div>
+        <br><br> 
 
         <?php }else{ ?>
 
