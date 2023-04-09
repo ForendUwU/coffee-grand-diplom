@@ -680,7 +680,14 @@ button.fb
 	margin-top: 20px;
 }
 
-.kolvoInp
+
+.kolvoInpM
+{
+	padding-left: 0% !important;
+
+}
+
+.kolvoInpD
 {
 	padding-left: 5% !important;
 

@@ -96,7 +96,7 @@
                         <h3>".$row['opis']."</h3>
                         <h4>".$row['cena']." руб.</h4>
                         <h3 class='kolvoh'><input type='number' id=".$row['idTov']." class='form-control kolvoInp' value='".$row['kolvoTov']."'></input></h3>
-                        <button class='fb' type='submit' name='addBtn' value=".$row['idTov'].">Удалить</button>
+                        <form method='POST' action='udal.php'><button class='fb trashBtn' value=".$row['idTov']." name='idTov' type='submit'>Удалить</button></form>
                         
                         </div>
                         ";
@@ -192,6 +192,26 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.15/dist/sweetalert2.all.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.15/dist/sweetalert2.min.css">
         <script>
+            document.addEventListener("DOMContentLoaded", function() {
+            if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                var els = document.querySelectorAll(".kolvoInp");
+                for (var i = 0; i < els.length; i++) {
+                els[i].classList.add('kolvoInpM');
+                els[i].classList.remove('kolvoInpD');
+                }
+            } else {
+                var els = document.querySelectorAll(".kolvoInp");
+                for (var i = 0; i < els.length; i++) {
+                els[i].classList.add('kolvoInpD');
+                els[i].classList.remove('kolvoInpM');
+                }
+            }
+            });
+            
+
+
+
+
             var btn = document.getElementById('zakBtn');
             btn.addEventListener("click", function () { 
                 Swal.fire({
@@ -245,8 +265,9 @@
 
             
 
-            $('.kolvoh').blur(function() {
+            $('.kolvoInp').blur(function() {
                 var kolvoTov = $(this).val();
+                
                 var idTov = $(this).attr('id');
                 console.log(idTov);
                     if(!/^[0-9]+$/.test(kolvoTov) || kolvoTov <= 0)
