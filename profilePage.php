@@ -79,39 +79,35 @@
             <div class="row centered">
                 <br><br>
                 <div class="col-lg-8 col-lg-offset-2">
-                    <h4>История заказов</h4>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 col-lg-6">
-                    <h3>Дата</h3>
-                    <hr>
+                    
+                
+                    
                     <?php 
                         session_start();
                         include 'db.php';
-                        $sql = 'SELECT dateZak FROM zakazy where idUser='.$_COOKIE["userID"].' and dateZak != 0000-00-00';
+                        $sql = 'SELECT dateZak, sumZakaza FROM zakazy where idUser='.$_COOKIE["userID"].' and dateZak != 0000-00-00';
                         $result = mysqli_query($connection, $sql);
+                        
+                        if (mysqli_num_rows($result) > 0) {
+                            echo "<h4>История заказов</h4>
+                                  <hr>";
+                        
                         while ($row = mysqli_fetch_array($result))
                         {   
                             echo "<h3>".$row['dateZak']."</h3>";
+                            echo "<h3>".$row['sumZakaza']." руб.</h3><hr>";
+
                         }
                         mysqli_close($connection);
-                    ?>
-                    <hr>
+
+                    }else{ 
+
+                    echo "<div class=' empty'>
+                            <h1>Нет заказов</h1>
+                          </div>";
+                    } ?>
                 </div>
-                <div class="col-12 col-sm-6 col-md-4 col-lg-6">
-                    <h3>Сумма</h3>
-                    <hr>
-                    <?php 
-                        include 'db.php';
-                        $sql = 'SELECT sumZakaza FROM zakazy where idUser='.$_COOKIE["userID"].' and dateZak != 0000-00-00';
-                        $result = mysqli_query($connection, $sql);
-                        while ($row = mysqli_fetch_array($result))
-                        {   
-                            echo "<h3>".$row['sumZakaza']." руб.</h3>";
-                        }
-                        mysqli_close($connection);
-                    ?>
-                    <hr>
-                </div>
+                
                 
 
                 
