@@ -145,9 +145,16 @@
                         $result1 = mysqli_query($connection, $sql1);
                         $row1 = mysqli_fetch_array($result1);
                         $sumWithSale = $row['totalSum'] - ($row1['bonusPoints'] * 0.001);
-                        
+
                         echo "<h4 id='sum'>Общая сумма заказа: ".$row['totalSum']." руб.</h4>";
-                        echo "<h4 id='saleSum'>Сумма заказа с бонусными баллами: ".$sumWithSale." руб.</h4>";
+                        if ($sumWithSale < 0) {
+                            echo "<h4 id='saleSum'>Сумма заказа с бонусными баллами: 0 руб.</h4>";
+                        }
+                        else
+                        {
+                            echo "<h4 id='saleSum'>Сумма заказа с бонусными баллами: ".$sumWithSale." руб.</h4>";    
+                        }
+                        
                         
 
                         mysqli_close($connection);
@@ -287,7 +294,16 @@
                         success: function(data) {
                             result = JSON.parse(data);
                             $('#sum').html("Общая сумма заказа: " + result.sum + " руб.");
-                            $('#saleSum').html("Сумма заказа с использованием бонусных баллов: " + result.saleSum + " руб.");
+                            
+                            if (result.saleSum < 0)
+                            {
+                                $('#saleSum').html("Сумма заказа с использованием бонусных баллов: 0 руб.");
+                            }
+                            else
+                            {
+                                $('#saleSum').html("Сумма заказа с использованием бонусных баллов: " + result.saleSum + " руб.");
+                            }
+                            
 
                         },
                         error: function(data) {
@@ -307,7 +323,15 @@
                         success: function(data) {
                             result = JSON.parse(data);
                             $('#sum').html("Общая сумма заказа: " + result.sum + " руб.");
-                            $('#saleSum').html("Сумма заказа с использованием бонусных баллов: " + result.saleSum + " руб.");
+                            
+                            if (result.saleSum < 0)
+                            {
+                                $('#saleSum').html("Сумма заказа с использованием бонусных баллов: 0 руб.");
+                            }
+                            else
+                            {
+                                $('#saleSum').html("Сумма заказа с использованием бонусных баллов: " + result.saleSum + " руб.");
+                            }
 
                         },
                         error: function(data) {

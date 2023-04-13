@@ -19,8 +19,16 @@
 
 	$user = $_COOKIE['userID'];
     if ($isBonus == 1) {
-    	$sum = $sum - ($bonusPointsVal * 0.001);
-    	$query=mysqli_query($connection,"update users set bonusPoints = 0 where ID='$user'; ");
+    	$check = $sum - ($bonusPointsVal * 0.001);
+    	if ($check < 0) {
+    		$updatedPoints = $bonusPointsVal - ($sum * 1000);
+    		$query=mysqli_query($connection,"update users set bonusPoints = ".$updatedPoints." where ID='$user'; ");
+    	}
+    	else
+    	{
+			$sum = $sum - ($bonusPointsVal * 0.001);
+    		$query=mysqli_query($connection,"update users set bonusPoints = 0 where ID='$user'; ");
+    	}
     }
     else
     {
