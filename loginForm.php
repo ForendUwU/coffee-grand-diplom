@@ -104,7 +104,7 @@
                             
                             if ($_COOKIE["admin"] == 1)
                             {
-                                 
+                                 echo "<li><a href='adminPanel.php'>Админская панель</a></li>";
                                  echo "<li><a href='profilePage.php'><i class='fa-solid fa-user'></i></a></li>";
                             }
 

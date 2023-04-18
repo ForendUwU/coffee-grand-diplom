@@ -692,3 +692,94 @@ button.fb
 	padding-left: 5% !important;
 
 }
+
+.panel
+{
+	background-color: #292929;
+}
+
+.selectTable
+{
+	border: none;
+	border-radius: 25px;
+
+	background-color: #ff7878;
+	
+	height: 50px;
+	width: 100%;
+
+	font-family: "Raleway";
+	font-weight: 400;
+	font-size: 20px;
+	color: white;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	padding-left: 20px !important;
+	padding-right: 20px !important;
+	margin-top: 35px !important;
+
+	-webkit-appearance: none;
+  	-moz-appearance: none;
+ 	appearance: none;
+
+ 	position: relative;
+}
+
+table 
+{
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 14px;
+    color: #000;
+    text-align: center;
+}
+
+th, td:first-child 
+{
+    background: #ff7878;
+    color: black;
+    padding: 10px 20px;
+
+    text-align: center;
+}
+
+th, td 
+{
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+td 
+{
+        background: #FFB9B9;
+}
+
+th:first-child, td:first-child 
+{
+        text-align: left;
+}
+
+.fTable
+{
+	display: flex;
+	justify-content: center;
+}
+
+table
+{
+	border-collapse: collapse;
+  border-spacing: 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.fTable img
+{
+	max-width: 200px;
+	max-height: 200px;
+	padding: 20px;
+}
