@@ -56,17 +56,12 @@
         <form id="myForm" method="POST" action="adminPanel.php">
             <div class="container">
                 <select class="selectTable minimal dropdown-menu selTable" name="table">
-                    
-                                <option class="dropdown-item" id = "null" value="null">Выберете таблицу</option>
-                                <option class="dropdown-item" id = "users" value="users">Пользователи</option>
-                                <option class="dropdown-item" id = "zakazy" value="zakazy">Заказы</option>
-                                <option class="dropdown-item" id = "tovar" value="tovar">Товары</option>
-                                <option class="dropdown-item" id = "category" value="category">Категории</option>
-                                <option class="dropdown-item" id = "cart" value="cart">Корзина</option>
-                            
-
-                    
-                    
+                    <option class="dropdown-item" id = "null" value="null">Выберете таблицу</option>
+                    <option class="dropdown-item" id = "users" value="users">Пользователи</option>
+                    <option class="dropdown-item" id = "zakazy" value="zakazy">Заказы</option>
+                    <option class="dropdown-item" id = "tovar" value="tovar">Товары</option>
+                    <option class="dropdown-item" id = "category" value="category">Категории</option>
+                    <option class="dropdown-item" id = "cart" value="cart">Корзина</option>
                 </select>
             </div>
         </form>
@@ -75,7 +70,6 @@
         <br>
 
         <?php 
-
             include 'db.php';
             if (isset($_POST['table'])) {
                 $table_name = $_POST['table'];
@@ -172,7 +166,6 @@
                                         echo "<td>". $row['cena'] . "</td>";
                                         echo "<td><img src=img/".$row['photo']." alt=''></td>";
                                         echo "<td>". $row['nazv'] . "</td>";
-
                                     echo "</tr>";
                                 }
                             }
@@ -191,22 +184,19 @@
                             }
                             else
                             {
-
-                            while ($row = mysqli_fetch_assoc($result)) 
-                            {
-                                echo "<tr>";
-                                    foreach ($row as $value) 
-                                    {
-                                        echo "<td>" . $value . "</td>";
-                                    }
-                                echo "</tr>";
-                            }
+                                while ($row = mysqli_fetch_assoc($result)) 
+                                {
+                                    echo "<tr>";
+                                        foreach ($row as $value) 
+                                        {
+                                            echo "<td>" . $value . "</td>";
+                                        }
+                                    echo "</tr>";
+                                }
                             }
                             echo "</tbody>";
                         echo "</table>";
                         echo "</div>";
-
-
 
 
                         echo "<br><br>";
@@ -409,18 +399,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 
-
-
-
-
-            <!-- Подключение jQuery -->
+            
             <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-            <!-- Подключение DataTables -->
             <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
             <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 
-            <!-- Подключение плагина для пагинации -->
             <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
             <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
@@ -480,13 +464,13 @@
         $(document).ready(function() {
             $('#myTable').DataTable({
             "paging": true,
-            "pageLength": 10, // количество строк на одной странице
-            "lengthChange": false, // скрыть выбор количества строк на странице
-            "searching": true, // скрыть строку поиска
-            "ordering": false, // разрешить сортировку по столбцам
-            "info": false, // показывать информацию о количестве строк и страниц
-            "autoWidth": false, // выключить автоматическое выравнивание ширины столбцов
-            "language": { // изменить язык текстовых сообщений
+            "pageLength": 10, 
+            "lengthChange": false, 
+            "searching": true, 
+            "ordering": false, 
+            "info": false, 
+            "autoWidth": false, 
+            "language": { 
             "paginate": {
                 "first": "Первая",
                 "last": "Последняя",
