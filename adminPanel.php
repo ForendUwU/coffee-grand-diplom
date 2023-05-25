@@ -53,6 +53,43 @@
             </div>
         </div>
 
+        <?php 
+            session_start();
+            if (isset($_SESSION['den'])) {
+                $al = $_SESSION['den'];
+                if ($al == 1) {
+                    echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11.6.15/dist/sweetalert2.all.min.js'></script>
+                    <script>
+                        Swal.fire({
+                        color: '#ffffff',
+                        title: 'Пользователи поздравлены',
+                        width: '600px',
+                        confirmButtonColor: '#ff7878',
+                        background: '#292929',
+                        });
+                    </script>";
+                    $_SESSION['den'] = 0;
+                }
+            }
+            
+        ?>
+
+        <div class="container">
+            <div class="row centered">
+                <form action="denRozhd.php" method="POST">
+                    <button type="submit" class="dobavButton selButton">Поздравить с днём рождения</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row centered">
+                <form action="otchet.php" method="POST">
+                    <button type="submit" class="dobavButton selButton">Отчёт по продажам за прошлый месяц</button>
+                </form>
+            </div>
+        </div>
+
         <form id="myForm" method="POST" action="adminPanel.php">
             <div class="container">
                 <select class="selectTable minimal dropdown-menu selTable" name="table">
@@ -73,7 +110,6 @@
             include 'db.php';
             if (isset($_POST['table'])) {
                 $table_name = $_POST['table'];
-
                 if (!is_null($table_name)) 
                 {
                     if ($table_name != 'null') 
@@ -419,7 +455,6 @@
 
             document.addEventListener("DOMContentLoaded", function(event) { 
                 var n = Cookies.get('table_name');
-                
                 if (n == 'users') 
                 {
                     var option = document.getElementById('users');
@@ -453,10 +488,10 @@
             });
         
 
-        window.addEventListener("beforeunload", function(event) {
-                Cookies.set('table_name', 'null');
+        //window.addEventListener("beforeunload", function(event) {
+                //Cookies.set('table_name', 'null1');
             
-        });
+        //});
 
 
 

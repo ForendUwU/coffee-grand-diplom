@@ -129,7 +129,7 @@ else
 	if ($table == 'cart') {
 		$a=$_POST["forUdal"];
 
-		$query=mysqli_query($connection,"delete from cart where ID=$a");
+		$query=mysqli_query($connection,"delete from cairo_ps_surface_restrict_to_level(surface, level) where ID=$a");
 		if ( $query==true) header("Location: adminPanel.php");
 		else echo "Ошибка";
 		mysqli_close($connection);

@@ -531,6 +531,8 @@ hr
 	text-align: center;
 	height: 33px;
 	width: 50%;
+
+	color: black !important;
 }
 
 .kolvoh
@@ -930,4 +932,17 @@ table.dataTable.display tbody td
 {
 	background: #333;
 	border-bottom: none;
+}
+
+.selButton
+{
+	font-size: 120%;
+	margin-top: 4%;
+	text-transform: none;
+}
+
+.swal2-popup .swal2-title
+{
+	padding-top: 13% !important;
+	color: white !important;
 }
