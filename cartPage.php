@@ -91,16 +91,13 @@
                     while ($row = mysqli_fetch_array($result))
                     {   
                         echo "<div class='col mt-4 tov' style='min-width:250px; max-width:250px;'>
-                        
                         <img src=img/".$row['photo']." alt=''>
                         <h4>".$row['naim']."</h4>
                         <h3>".$row['opis']."</h3>
                         <h4>".$row['cena']." руб.</h4>
                         <h3 class='kolvoh'><input type='number' id=".$row['idTov']." class='form-control kolvoInp' value='".$row['kolvoTov']."'></input></h3>
                         <form method='POST' action='udal.php'><button class='fb trashBtn' value=".$row['idTov']." name='idTov' type='submit'>Удалить</button></form>
-                        
-                        </div>
-                        ";
+                        </div>";
                     }
                     if (isset($_POST["addBtn"])) {
                         if (!isset($_SESSION["order"])) {
@@ -223,7 +220,7 @@
             var btn = document.getElementById('zakBtn');
             btn.addEventListener("click", function () { 
                 Swal.fire({
-                    title: 'Хотите ли вы использовать бонусные баллы?',
+                    title: '<p style="color:black">Хотите ли вы использовать бонусные баллы?</p>',
                     showConfirmButton: true,
                     confirmButtonColor: '#34eb5e',
                     confirmButtonText: 'Да',

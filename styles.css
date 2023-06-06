@@ -943,6 +943,6 @@ table.dataTable.display tbody td
 
 .swal2-popup .swal2-title
 {
-	padding-top: 13% !important;
+	/*padding-top: 13% !important;*/
 	color: white !important;
 }

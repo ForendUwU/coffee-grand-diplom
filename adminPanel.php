@@ -54,18 +54,20 @@
         </div>
 
         <?php 
+
             session_start();
+            
             if (isset($_SESSION['den'])) {
                 $al = $_SESSION['den'];
                 if ($al == 1) {
                     echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11.6.15/dist/sweetalert2.all.min.js'></script>
                     <script>
                         Swal.fire({
-                        color: '#ffffff',
                         title: 'Пользователи поздравлены',
                         width: '600px',
                         confirmButtonColor: '#ff7878',
                         background: '#292929',
+                        padding: '8% 0 0 0',
                         });
                     </script>";
                     $_SESSION['den'] = 0;

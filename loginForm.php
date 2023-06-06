@@ -16,25 +16,21 @@
     <body>
         <?php
 
-    include 'db.php';
-    $msg='';
-    $check = 0;
-    $success = false;
-    if(!empty($_POST['email']) && isset($_POST['email']) &&  !empty($_POST['password']) &&  isset($_POST['password']) )
-    {
-        $check = 1;
-        // имя пользователя и пароль отправлены из формы
-        $email=$_POST['email'];
-        $password=$_POST['password'];
-        $FIO=$_POST['FIO'];
-        $date=$_POST['dataRoz'];
-        $passCheck=$_POST['repeatPass'];
-        // регулярное выражение для проверки написания адреса электронной почты
-        $regex = '/^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/';
-        if ($password == $passCheck) {
-        
-        if(preg_match($regex, $email))
-        { 
+        include 'db.php';
+        $msg='';
+        $check = 0;
+        $success = false;
+        if(!empty($_POST['email']) && isset($_POST['email']) &&  !empty($_POST['password']) &&  isset($_POST['password']) )
+        {
+            $check = 1;
+            // имя пользователя и пароль отправлены из формы
+            $email=$_POST['email'];
+            $password=$_POST['password'];
+            $FIO=$_POST['FIO'];
+            $date=$_POST['dataRoz'];
+            $passCheck=$_POST['repeatPass'];
+            // регулярное выражение для проверки написания адреса электронной почты
+            
             //$password=md5($password); // encrypted password
             $activation=md5($email.time()); // encrypted email+timestamp
             $count=mysqli_query($connection,"SELECT ID FROM users WHERE email='$email'");
@@ -43,13 +39,13 @@
             if(mysqli_num_rows($count) < 1)
             {
                 echo "<script>swal({
-                    color: '#fff',
-                    title: 'Регистрация выполнена успешно, пожалуйста, проверьте электронную почту.',
-                    width: '600px',
-                    confirmButtonColor: '#ff7878',
-                    background: '#292929',
+                color: '#fff',
+                title: 'Регистрация выполнена успешно, пожалуйста, проверьте электронную почту.',
+                width: '600px',
+                confirmButtonColor: '#ff7878',
+                background: '#292929',
 
-                    });</script>";
+                });</script>";
                 //$msg = "";
                 $success = true;
                 mysqli_query($connection,"INSERT INTO users VALUES('$id','$FIO', '$email', '$date', 0, '$password','$activation', default)");
@@ -67,18 +63,9 @@
             {
                 $msg= 'Данный адрес электронный почты уже занят, пожалуйста, введите другой. '; 
             }
+            
         }
-        else
-        {
-            $msg = 'Адрес, введенный вами, неверен. Пожалуйста, попробуйте еще раз.'; 
-        }
-        }
-        else
-        {
-            $msg = 'Пароли не совпадают.'; 
-        }
-    }
-?>
+        ?>
         <script src="https://kit.fontawesome.com/b488d68d7d.js" crossorigin="anonymous"></script> 
         <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
@@ -176,7 +163,7 @@
                     </div>
 
                     <div class="group">
-                        <input placeholder="E-mail" id="user" type="text" class="input reg" name="email" value="">
+                        <input placeholder="E-mail" id="emailCheck" type="text" class="input reg" name="email" value="">
                     </div>
 
                     <div class="group">
@@ -187,7 +174,7 @@
                         <input placeholder="Пароль" id="pass passcheck" type="password" class="input reg" data-type="password" name="password">
                     </div>
                     <div class="group">
-                        <input placeholder="Повторите пароль" id="pass" type="password" class="input reg" data-type="password" name="repeatPass">
+                        <input placeholder="Повторите пароль" id="pass secondPass" type="password" class="input reg" data-type="password" name="repeatPass">
                     </div>
 
                     <div class="group">
@@ -211,29 +198,99 @@
 
             document.getElementById('send').addEventListener("submit", function(e) {
                 
-                if (document.getElementById('pass passcheck').value.length < 6) 
-                        {
-                            document.getElementById('errormsg1').innerHTML = "Пароль должен быть больше 6 символов";
-                            e.preventDefault();
-                            return false;
-                        }
+                if (document.getElementById('pass passcheck').value != document.getElementById('pass secondPass').value) 
+                {
+                    swal({
+                        color: '#fff',
+                        title: "Пароли не совпадают",
+                        width: '600px',
+                        heightAuto: 'false',
+                        confirmButtonColor: '#ff7878',
+                        background: '#292929',
 
-                            var regInputs = document.getElementsByClassName('reg');
-                            for (var i = regInputs.length - 1; i >= 0; i--) {
-                            if (regInputs[i].value == "") 
-                                {
-                                    document.getElementById('errormsg1').innerHTML = "Не все поля заполнены";
-                                    e.preventDefault();
-                                    return false;
-                                }
-                            }
+                    });
+                    e.preventDefault();
+                    return false;
+                }
+
+                if (document.getElementById('pass passcheck').value.length < 6) 
+                {
+                    swal({
+                        color: '#fff',
+                        title: "Пароль должен быть больше 6 символов",
+                        width: '600px',
+                        heightAuto: 'false',
+                        confirmButtonColor: '#ff7878',
+                        background: '#292929',
+
+                    });
+                    e.preventDefault();
+                    return false;
+                }
+
+                var regInputs = document.getElementsByClassName('reg');
+                for (var i = regInputs.length - 1; i >= 0; i--) {
+                    if (regInputs[i].value == "") 
+                    {
+                        swal({
+                        color: '#fff',
+                        title: "Не все поля заполнены",
+                        width: '600px',
+                        heightAuto: 'false',
+                        confirmButtonColor: '#ff7878',
+                        background: '#292929',
+
+                        });
+                        e.preventDefault();
+                        return false;
+                    }
+                }
                 
                 if (Date.parse(document.getElementById('user dat').value) >= new Date()) 
-                        {
-                            document.getElementById('errormsg1').innerHTML = "Дата рождения не может быть больше текущей";
-                            e.preventDefault();
-                            return false;
-                        }
+                {
+                    swal({
+                        color: '#fff',
+                        title: "Дата рождения не может быть больше текущей",
+                        width: '600px',
+                        heightAuto: 'false',
+                        confirmButtonColor: '#ff7878',
+                        background: '#292929',
+
+                    });
+                    e.preventDefault();
+                    return false;
+                }
+
+                if (Date.parse(document.getElementById('user dat').value) <= new Date(1902, 1, 1, 0, 0, 0, 0)) 
+                {
+                    swal({
+                        color: '#fff',
+                        title: "Некоректная дата рождения",
+                        width: '600px',
+                        heightAuto: 'false',
+                        confirmButtonColor: '#ff7878',
+                        background: '#292929',
+
+                    });
+                    e.preventDefault();
+                    return false;
+                }
+
+                const regEmail = /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/;
+                if (!regEmail.test(document.getElementById('emailCheck').value)) 
+                {
+                    swal({
+                        color: '#fff',
+                        title: "Неверный формат email",
+                        width: '600px',
+                        heightAuto: 'false',
+                        confirmButtonColor: '#ff7878',
+                        background: '#292929',
+
+                    });
+                    e.preventDefault();
+                    return false;
+                }
 
                 
             });

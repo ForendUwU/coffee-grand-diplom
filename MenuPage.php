@@ -199,7 +199,7 @@
             <script>
                 Swal.fire({
                     icon: 'success',
-                    title: 'Заказ успешно оформлен',
+                    title: '<p style="color:black">Заказ успешно оформлен',
                     showConfirmButton: true,
                     confirmButtonColor: '#ff7878'
                 })
@@ -218,7 +218,6 @@
 
             $(document).delegate(".fb","click", function() {
                 let idTov = $(this).val();
-                
                 $.ajax({
                     type: "POST",
                     url: 'dobav.php',
