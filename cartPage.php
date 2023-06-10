@@ -279,7 +279,7 @@
                     {
                         $(this).val(1);
                         Swal.fire({
-                        title: 'Неправильный формат количества',
+                        title: '<p style="color:black">Неправильный формат количества</p>',
                         showConfirmButton: true,
                         confirmButtonColor: '#ff7878',
                         });
