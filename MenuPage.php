@@ -29,12 +29,13 @@
                         <?php
                         session_start();
                         include 'db.php';
-                        if (!isset($_SESSION["order"])) {
+                       //if (!isset($_SESSION["order"])) {
                             $sql = 'SELECT max(ID) as maxId FROM zakazy';
                             $result = mysqli_query($connection, $sql);
                             $row = mysqli_fetch_array($result);
                             $_SESSION["order"] = $row['maxId'];
-                        }
+                        //}
+                            
 
                             if (!isset($_COOKIE["admin"]) or !isset($_COOKIE["user"])) {
                                 setcookie("admin", 0);
@@ -224,7 +225,9 @@
                     data: {id:idTov},
                     success: function(data) {
                         result = JSON.parse(data);
+                        console.log(data)
                         $('#kolvo').html(result);
+
 
 
                     },

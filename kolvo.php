@@ -18,7 +18,7 @@
 
         $arr = array();
         $arr['sum'] =$row['totalSum'];
-        $arr['saleSum'] = $row['totalSum'] - ($row1['bonusPoints'] * 0.001);
+        $arr['saleSum'] = round($row['totalSum'] - ($row1['bonusPoints'] * 0.001), 2);
          
                     
 	echo json_encode($arr);

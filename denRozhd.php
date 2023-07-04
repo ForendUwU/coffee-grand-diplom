@@ -11,22 +11,31 @@
 		$usersEmails = array();
 		while($row1 = mysqli_fetch_array($result1)) 
 		{
-        	$usersEmails[] = $row1["email"];
+        	//$usersEmails[] = $row1["email"];
+        	array_push($usersEmails, $row1["email"]);
     	}
 
     	foreach ($usersEmails as $userEmail) 
 		{
 			$query=mysqli_query($connection,"update users set bonusPoints = bonusPoints + 3000 where email='$userEmail'; ");
 
+			try {
     		$to=$userEmail;
     		$subject="Поздравляем с днём рождения";
     		$body='Здравствуйте! Поздравляем вас с этим прекрасным днём.
     		<br>
     		В подарок вы получаете 3000 бонусных баллов, которые вы можете использовать на сайте при заказе!';
     		Send_Mail($to,$subject,$body);
+    		}
+    		catch (Exception $e) {
+    			   				$_SESSION['den'] = 1;
+				header('Location: adminPanel.php');
+			}
+
+
 		}	
 	}
 
 	$_SESSION['den'] = 1;
-	header('Location: adminPanel.php')
+	header('Location: adminPanel.php');
 ?>

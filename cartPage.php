@@ -220,7 +220,7 @@
             var btn = document.getElementById('zakBtn');
             btn.addEventListener("click", function () { 
                 Swal.fire({
-                    title: '<p style="color:black">Хотите ли вы использовать бонусные баллы?</p>',
+                    title: '<p style="color:black">Хотите ли вы использовать бонусные баллы?</p> <p></p>',
                     showConfirmButton: true,
                     confirmButtonColor: '#34eb5e',
                     confirmButtonText: 'Да',
@@ -270,7 +270,7 @@
 
             
 
-            $('.kolvoInp').blur(function() {
+            $('.kolvoInp').change(function() {
                 var kolvoTov = $(this).val();
                 
                 var idTov = $(this).attr('id');
